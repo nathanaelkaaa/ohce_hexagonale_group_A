@@ -1,0 +1,18 @@
+{
+    "fr": {
+        "intro": "Entrez du texte ici. 'exit' pour quitter",
+        "exit": "Au revoir",
+        "morning": "Bonjour",
+        "afternoon": "Bon après-midi",
+        "evening": "Bonsoir",
+        "is_palindrome": "Bien dit !"
+    },
+    "en": {
+        "intro": "Enter text here. 'exit' to quit",
+        "exit": "Goodbye",
+        "morning": "Good morning",
+        "afternoon": "Good afternoon",
+        "evening": "Good evening",
+        "is_palindrome": "Well said!"
+    }
+}

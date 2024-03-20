@@ -1,26 +1,8 @@
 import os
+import json
 from datetime import datetime
 
 DEFAULT_LANG = 'en'
-
-translation_dictionary = {
-    "fr": {
-        "intro" : "Entrez du texte ici. 'exit' pour quitter",
-        "exit" : "Au revoir",
-        "morning" : "Bonjour",
-        "afternoon" : "Bon après-midi",
-        "evening" : "Bonsoir",
-        "is_palindrome" : "Bien dit !"
-    },
-    "en": {
-        "intro" : "Enter text here. 'exit' to quit",
-        "exit" : "Goodbye",
-        "morning" : "Good morning",
-        "afternoon" : "Good afternoon",
-        "evening" : "Good evening",
-        "is_palindrome" : "Well said!"
-    }
-}
 
 def get_time():
     current_hour = datetime.now().hour
@@ -32,17 +14,29 @@ def get_time():
         return "evening"
 
 def get_translation(language, key):
-    return translation_dictionary[language].get(key, "")
+    try:
+        with open('translations.json', 'r') as file:
+            translations = json.load(file)
+            return translations.get(language, {}).get(key, "")
+    except FileNotFoundError:
+        print("File not found.")
+        return ""
+    except json.JSONDecodeError:
+        print("Error while reading JSON file.")
+        return ""
 
-def is_palindrome(s):
-    return s == s[::-1]
+def is_palindrome(user_input):
+    return user_input == user_input[::-1]
 
 def detect_language_os():
     lang = os.environ.get('LANG', 'en')[:2]
     return lang
 
 def verify_language(lang):
-    return lang if lang in translation_dictionary else DEFAULT_LANG
+    with open('translations.json', 'r') as file:
+        translations = json.load(file)
+    return lang if lang in translations else DEFAULT_LANG
+
 
 def main():
     detect_lang = detect_language_os()
