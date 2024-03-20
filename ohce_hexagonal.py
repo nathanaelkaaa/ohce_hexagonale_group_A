@@ -1,11 +1,23 @@
+import os
 from datetime import datetime
-from langdetect import detect, LangDetectException
 
-
-welcome_messages = {
-    "morning": {"fr": "Bonjour", "en": "Good morning"},
-    "afternoon": {"fr": "Bon après-midi", "en": "Good afternoon"},
-    "evening": {"fr": "Bonsoir", "en": "Good evening"}
+translation_dictionary = {
+    "fr": {
+        "intro" : "Entrez du texte ici. 'exit' pour quitter",
+        "exit" : "Au revoir",
+        "morning" : "Bonjour",
+        "afternoon" : "Bon après-midi",
+        "evening" : "Bonsoir",
+        "is_palindrome" : "Bien dit !"
+    },
+    "en": {
+        "intro" : "Enter text here. 'exit' to quit",
+        "exit" : "Goodbye",
+        "morning" : "Good morning",
+        "afternoon" : "Good afternoon",
+        "evening" : "Good evening",
+        "is_palindrome" : "Well said!"
+    }
 }
 
 def get_time():
@@ -17,41 +29,36 @@ def get_time():
     else:
         return "evening"
 
-def get_welcome(language):
-    time_of_day = get_time()
-    return welcome_messages[time_of_day].get(language, "Hello")
-
-def get_out(language):
-    return {"fr": "Au revoir", "en": "Goodbye"}.get(language, "Goodbye")
+def get_translation(language, key):
+    return translation_dictionary[language].get(key, "")
 
 def is_palindrome(s):
     return s == s[::-1]
 
-def detect_language(text):
-    try:
-        return detect(text) if len(text) > 3 else "en"
-    except LangDetectException:
-        return "en"
+def detect_language_os():
+    # Obtenir la langue depuis la variable d'environnement et utilisation de l'anglais, 'en', par défaut
+    lang = os.environ.get('LANG', 'en')[:2]
+    return lang if lang in translation_dictionary else "en"
 
 def main():
-    print("Entrez du texte ici. 'exit' pour quitter")
+    language = detect_language_os()
+    print(get_translation(language, "intro"))
     
-    language = "en"  
     greeted = False
     
     while True:
         user_input = input("> ").strip()
         
         if not greeted:
-            language = detect_language(user_input)
-            print(get_welcome(language))
+            time_of_day = get_time()
+            print(get_translation(language, time_of_day))
             greeted = True
 
         if user_input.lower() == "exit":
-            print(get_out(language))
+            print(get_translation(language, "exit"))
             break
         elif is_palindrome(user_input.replace(" ", "").lower()):
-            print({"fr": "Bien dit !", "en": "Well said!"}.get(language, "Well said!"))
+            print(get_translation(language, "is_palindrome"))
         else:
             print(user_input[::-1])
 
