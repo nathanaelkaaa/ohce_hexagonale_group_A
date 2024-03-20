@@ -1,6 +1,8 @@
 import os
 from datetime import datetime
 
+DEFAULT_LANG = 'en'
+
 translation_dictionary = {
     "fr": {
         "intro" : "Entrez du texte ici. 'exit' pour quitter",
@@ -36,24 +38,23 @@ def is_palindrome(s):
     return s == s[::-1]
 
 def detect_language_os():
-    # Obtenir la langue depuis la variable d'environnement et utilisation de l'anglais, 'en', par défaut
     lang = os.environ.get('LANG', 'en')[:2]
-    return lang if lang in translation_dictionary else "en"
+    return lang
+
+def verify_language(lang):
+    return lang if lang in translation_dictionary else DEFAULT_LANG
 
 def main():
-    language = detect_language_os()
-    print(get_translation(language, "intro"))
+    detect_lang = detect_language_os()
+    language = verify_language(detect_lang)
+    time_of_day = get_time()
     
-    greeted = False
+    print(get_translation(language, time_of_day))
+    print(get_translation(language, "intro"))
     
     while True:
         user_input = input("> ").strip()
         
-        if not greeted:
-            time_of_day = get_time()
-            print(get_translation(language, time_of_day))
-            greeted = True
-
         if user_input.lower() == "exit":
             print(get_translation(language, "exit"))
             break
