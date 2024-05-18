@@ -1,40 +1,28 @@
-# langue.py
-from LangueManager import LanguageManager
-
-# langue.py
-import os
 import json
 
 class Langue:
-    def __init__(self, translations_file, language_code):
-        self.language_manager = LanguageManager(translations_file)
-        self.language_code = language_code
+    def __init__(self, fichier_traduction, langue_code):
+        self.traductions = self.charger_traductions(fichier_traduction)
+        self.langue_code = langue_code
 
-    def detect_language_os(self):
-        return os.environ.get('LANG', 'en')[:2]
+    def charger_traductions(self, chemin_fichier):
+        with open(chemin_fichier, 'r') as file:
+            traductions = json.load(file)
+        return traductions
 
-    def saluer(self, moment):
-        raise NotImplementedError
+    def obtenir_traduction(self, language, key):
+        return self.traductions.get(language, {}).get(key, "")
 
-    def feliciter(self):
-        raise NotImplementedError
-
-    def acquitter(self, moment):
-        raise NotImplementedError
-
-
-# langue_en.py
-class LangueTranslation(Langue):
     def saluer(self, moment):
         if 5 <= moment < 12:
-            return self.language_manager.get_translation(self.language_code, 'morning')
+            return self.obtenir_traduction(self.langue_code, 'morning')
         elif 12 <= moment < 18:
-            return self.language_manager.get_translation(self.language_code, 'afternoon')
+            return self.obtenir_traduction(self.langue_code, 'afternoon')
         else:
-            return self.language_manager.get_translation(self.language_code, 'evening')
+            return self.obtenir_traduction(self.langue_code, 'evening')
 
     def feliciter(self):
-        return self.language_manager.get_translation(self.language_code, 'well_said')
+        return self.obtenir_traduction(self.langue_code, 'is_palindrome')
 
     def acquitter(self):
-        return self.language_manager.get_translation(self.language_code, 'goodbye')
+        return self.obtenir_traduction(self.langue_code, 'exit')

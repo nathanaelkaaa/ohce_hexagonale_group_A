@@ -1,20 +1,31 @@
-# main_console.py
+# console.py
+import json
 from Horloge import Horloge
+import os
 from Langue import Langue
 from AnalyseurDeChaine import AnalyseurDeChaine
 
 
 def main():
-    langue = Langue('translations.json')  # Automatically detects language or uses English
+    langue_code = os.environ.get('LANG', 'en')[:2]
+    langue = Langue('traductions.json', langue_code)
     horloge = Horloge()
     analyseur = AnalyseurDeChaine(langue, horloge)
+    
+    heure = horloge.obtenir_heure_actuelle()
+    salutation = langue.saluer(heure)
+    acquitter = langue.acquitter()
+    
+    print(f"{salutation}")
 
     while True:
-        entree = input("Enter text ('exit' to quit): ")
-        if entree.lower() == 'exit':
-            print(langue.acquitter(horloge.get_heure_actuelle()))
+        chaine = input("Entrez une chaîne à analyser (ou 'exit' pour quitter) : ").strip()
+        if chaine.lower() == 'exit':
+            print(f"{acquitter}")
             break
-        print(analyseur.analyser_chaine(entree))
 
-if __name__ == "__main__":
+        resultat = analyseur.analyser_chaine(chaine)
+        print(f"{resultat}")
+
+if __name__ == '__main__':
     main()
