@@ -14,5 +14,21 @@
         "afternoon": "Good afternoon",
         "evening": "Good evening",
         "is_palindrome": "Well said!"
+    },
+    "es": {
+        "intro": "Ingrese texto aquí. 'exit' para salir",
+        "exit": "Adiós",
+        "morning": "Buenos días",
+        "afternoon": "Buenas tardes",
+        "evening": "Buenas noches",
+        "is_palindrome": "¡Bien dicho!"
+    },
+    "de": {
+        "intro": "Geben Sie hier Text ein. 'exit' zum Beenden",
+        "exit": "Auf Wiedersehen",
+        "morning": "Guten Morgen",
+        "afternoon": "Guten Tag",
+        "evening": "Guten Abend",
+        "is_palindrome": "Gut gesagt!"
     }
 }

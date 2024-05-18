@@ -14,12 +14,13 @@ def main():
     
     heure = horloge.obtenir_heure_actuelle()
     salutation = langue.saluer(heure)
+    intro = langue.obtenir_traduction(langue_code, 'intro')
     acquitter = langue.acquitter()
     
     print(f"{salutation}")
 
     while True:
-        chaine = input("Entrez une chaîne à analyser (ou 'exit' pour quitter) : ").strip()
+        chaine = input(f"{intro} : ").strip()
         if chaine.lower() == 'exit':
             print(f"{acquitter}")
             break

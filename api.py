@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from Horloge import Horloge
-from Langue import Langue # Assume this is a subclass of Langue tailored for English
+from Langue import Langue
 from AnalyseurDeChaine import AnalyseurDeChaine
 
 app = Flask(__name__)

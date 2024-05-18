@@ -10,8 +10,8 @@ class Langue:
             traductions = json.load(file)
         return traductions
 
-    def obtenir_traduction(self, language, key):
-        return self.traductions.get(language, {}).get(key, "")
+    def obtenir_traduction(self, language, cle):
+        return self.traductions.get(language, {}).get(cle, "")
 
     def saluer(self, moment):
         if 5 <= moment < 12:
