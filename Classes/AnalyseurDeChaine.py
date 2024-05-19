@@ -1,5 +1,6 @@
-from Langue import Langue
-from Horloge import Horloge
+from Classes.Langue import Langue
+from Classes.Horloge import Horloge
+
 class AnalyseurDeChaine:
     def __init__(self, langue: Langue, horloge: Horloge):
         self.langue = langue 

@@ -1,9 +1,12 @@
-# console.py
-import json
-from Horloge import Horloge
 import os
-from Langue import Langue
-from AnalyseurDeChaine import AnalyseurDeChaine
+import sys 
+
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from Classes.Horloge import Horloge
+from Classes.Langue import Langue
+from Classes.AnalyseurDeChaine import AnalyseurDeChaine
 
 
 def main():

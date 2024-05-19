@@ -1,4 +1,3 @@
-# horloge_systeme.py
 from datetime import datetime
 
 class Horloge():

@@ -1,7 +1,13 @@
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from flask import Flask, request, jsonify
-from Horloge import Horloge
-from Langue import Langue
-from AnalyseurDeChaine import AnalyseurDeChaine
+from Classes.Horloge import Horloge
+from Classes.Langue import Langue
+from Classes.AnalyseurDeChaine import AnalyseurDeChaine
+
 
 app = Flask(__name__)
 

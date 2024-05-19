@@ -3,7 +3,7 @@
         "intro": "Entrez du texte ici. 'exit' pour quitter",
         "exit": "Au revoir",
         "morning": "Bonjour",
-        "afternoon": "Bon après-midi",
+        "afternoon": "Bon apres-midi",
         "evening": "Bonsoir",
         "is_palindrome": "Bien dit !"
     },
@@ -16,9 +16,9 @@
         "is_palindrome": "Well said!"
     },
     "es": {
-        "intro": "Ingrese texto aquí. 'exit' para salir",
-        "exit": "Adiós",
-        "morning": "Buenos días",
+        "intro": "Ingrese texto aqui. 'exit' para salir",
+        "exit": "Adios",
+        "morning": "Buenos dias",
         "afternoon": "Buenas tardes",
         "evening": "Buenas noches",
         "is_palindrome": "¡Bien dicho!"
